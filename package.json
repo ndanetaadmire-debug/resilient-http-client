@@ -1,31 +1,42 @@
 {
-  "name": "5.3-axios",
+  "name": "resilient-http-client",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "A small, typed HTTP client on native fetch: timeouts, retries with jittered backoff and Retry-After, per-host circuit breakers, single-flight GETs, TTL caching with stale-if-error and schema-validated responses. Zero runtime dependencies.",
+  "license": "MIT",
+  "author": "Admire T. Ndaneta",
   "type": "module",
   "engines": {
-    "node": ">= 14.0.0",
-    "npm": ">= 6.0.0"
+    "node": ">=22"
   },
-  "homepage": "",
-  "repository": {
-    "type": "git",
-    "url": ""
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
   },
-  "bugs": "",
-  "keywords": [],
-  "author": "",
-  "contributors": [],
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "keywords": ["fetch", "http", "retry", "circuit-breaker", "backoff", "typescript"],
   "scripts": {
-    "dev": "",
-    "test": ""
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "example": "tsx examples/activity-finder/server.ts",
+    "prepack": "npm run build"
   },
-  "description": "",
-  "dependencies": {
-    "axios": "^1.16.0",
-    "body-parser": "^1.20.2",
-    "ejs": "^3.1.9",
-    "express": "^4.22.2"
-  },
-  "license": "ISC"
+  "devDependencies": {
+    "@types/ejs": "^3.1.5",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.10.0",
+    "@types/supertest": "^7.2.1",
+    "ejs": "^7.0.2",
+    "express": "^5.3.0",
+    "supertest": "^7.3.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0",
+    "zod": "^4.6.7"
+  }
 }
