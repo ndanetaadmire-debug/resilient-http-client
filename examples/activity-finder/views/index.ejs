@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Activity finder</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 36rem; margin: 3rem auto; padding: 0 1rem; color: #1d1d1f; }
+    form { display: flex; gap: .5rem; flex-wrap: wrap; align-items: end; margin: 1.5rem 0; }
+    label { display: grid; gap: .25rem; }
+    .card { border: 1px solid #dadce0; border-radius: 10px; padding: 1rem 1.25rem; }
+    .error { color: #b3261e; } .notice { color: #8a5a00; }
+  </style>
+</head>
+<body>
+  <h1>Bored? Find something to do</h1>
+  <form method="post" action="/">
+    <label>Type
+      <select name="type">
+        <option value="">Any</option>
+        <% types.forEach(function (t) { %><option value="<%= t %>"><%= t %></option><% }) %>
+      </select>
+    </label>
+    <label>People
+      <select name="participants">
+        <option value="">Any</option>
+        <% for (var n = 1; n <= 8; n++) { %><option value="<%= n %>"><%= n %></option><% } %>
+      </select>
+    </label>
+    <button type="submit">Suggest</button>
+  </form>
+  <% if (notice) { %><p class="notice" role="status"><%= notice %></p><% } %>
+  <% if (error) { %><p class="error" role="alert"><%= error %></p><% } %>
+  <% if (data) { %>
+    <article class="card">
+      <h2><%= data.activity %></h2>
+      <p><%= data.type %> · <%= data.participants %> <%= data.participants === 1 ? "person" : "people" %></p>
+    </article>
+  <% } %>
+</body>
+</html>
